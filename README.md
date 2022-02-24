@@ -1,7 +1,6 @@
-# bahrain_flutter_task
+# Bahrain_Flutter_Task
 
 A new Flutter project.
-
 
 ## Demo
 https://user-images.githubusercontent.com/50070223/155473578-7bbb0b37-8808-4223-9fa0-9fb6de78d6dd.mp4
