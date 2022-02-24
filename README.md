@@ -2,7 +2,28 @@
 
 A new Flutter project.
 
+
+## Demo
+https://user-images.githubusercontent.com/50070223/155473578-7bbb0b37-8808-4223-9fa0-9fb6de78d6dd.mp4
+
+
+### Missions
+- Get All Notes ( Online From Server & Offline From Local Database )
+- Get All Users ( Online From Server & Offline From Local Database )
+- Adding Note ( Online To Server & Offline To Local Database )
+- Adding User ( Online To Server & Offline To Local Database )
+- Searching In List 
+
+
+### Using :
+- Dart (Flutter)
+- Bloc State Management
+- Restful Apis (Dio Package)
+
 ## Getting Started
+
+
+
 
 This project is a starting point for a Flutter application.
 
