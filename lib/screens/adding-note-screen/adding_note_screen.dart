@@ -38,10 +38,6 @@ class AddingNoteScreen extends StatelessWidget {
         cubit = AddingNoteCubit.get(context);
         cubit2 = SettingsCubit.get(context);
 
-        if (state is AddingNoteSuccessState) {
-          // ShowMessage(context);
-        }
-
         return Scaffold(
             appBar: AppBar(title: const Text('Adding Notes'), actions: [
               IconButton(

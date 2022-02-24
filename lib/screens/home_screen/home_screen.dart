@@ -33,47 +33,38 @@ class _HomeScreenState extends State<HomeScreen> {
 
   NotesGettingCubit? cubit;
   SettingsCubit? cubit2;
-  // MySharedPreferences sharedPreferences = MySharedPreferences() ;
 
   @override
   Widget build(BuildContext context) {
-    print('yes entered');
-    // final GlobalKey<ScaffoldState> _scaffoldKey =
-    //     GlobalKey<ScaffoldState>();
     return BlocConsumer<NotesGettingCubit, NotesGettingStates>(
       listener: (context, state) {},
       builder: (context, state) {
         cubit = NotesGettingCubit.get(context);
         cubit2 = SettingsCubit.get(context);
-        print('not again');
         if (state is ChangedToggleTest) {
-
           print('is that right or something else ${cubit2!.toggle}');
           cubit2!.toggle
-              ? cubit!.getDataFromDatabase(cubit!.database,context)
+              ? cubit!.getDataFromDatabase(cubit!.database, context)
               : cubit!.getNotesFromServer(context);
         }
         if (state is NoteGettingInitialState) {
           cubit2!.toggle
-              ? cubit!.getDataFromDatabase(cubit!.database,context)
+              ? cubit!.getDataFromDatabase(cubit!.database, context)
               : cubit!.getNotesFromServer(context);
         }
         if (state is NoteGettingSuccessState) {
           myAllNotes = state.notesResponseList;
-          print('you make great ${myAllNotes?.length}');
         }
         if (state is NoteSearchingFillingState) {
           myAllNotes = state.notesResponseList;
-          print('you make great ${myAllNotes?.length}');
         }
         if (state is NoteSearchingEmptyState) {
           myAllNotes = state.notesResponseList;
-          print('you make great ${myAllNotes?.length}');
         }
 
-        if(state is LoadingAgain){
+        if (state is LoadingAgain) {
           cubit2!.toggle
-              ? cubit!.getDataFromDatabase(cubit!.database,context)
+              ? cubit!.getDataFromDatabase(cubit!.database, context)
               : cubit!.getNotesFromServer(context);
         }
 
@@ -84,16 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
             actions: [
               IconButton(
                 icon: const Icon(Icons.person_add),
-                tooltip: 'Show Snackbar',
+                tooltip: 'Show Snack bar',
                 onPressed: () {
-                  print('${cubit2!.toggle}');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ProfileScreen()));
                 },
               ),
               IconButton(
                 icon: const Icon(Icons.settings),
-                tooltip: 'Show Snackbar',
+                tooltip: 'Show Snack bar',
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => SettingScreen()));

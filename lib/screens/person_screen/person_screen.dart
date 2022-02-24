@@ -43,15 +43,11 @@ class ProfileScreen extends StatelessWidget {
         cubit = AddingPersonCubit.get(context);
         cubit2 = SettingsCubit.get(context);
 
-        if (state is AddingPersonSuccessState) {
-          // ShowMessage(context);
-        }if (state is ChangedToggleTest3) {
+        if (state is AddingPersonSuccessState) {}
+        if (state is ChangedToggleTest3) {
           if (titleController.text.isNotEmpty) {
-            cubit2!.toggle
-                ? saveInLocalDB(context)
-                : saveInServer(context);
+            cubit2!.toggle ? saveInLocalDB(context) : saveInServer(context);
           }
-          // ShowMessage(context);
         }
         return Scaffold(
             appBar: AppBar(
@@ -59,14 +55,13 @@ class ProfileScreen extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 20.0, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
                 child: Column(
                   children: [
                     Container(
                       padding: const EdgeInsets.all(8), // Border width
-                      decoration:
-                          const BoxDecoration(shape: BoxShape.circle),
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
                       child: ClipOval(
                         child: SizedBox.fromSize(
                           size: const Size.fromRadius(48),
@@ -131,12 +126,6 @@ class ProfileScreen extends StatelessWidget {
                               ? saveInLocalDB(context)
                               : saveInServer(context);
                         }
-                        // cubit!.cubitAddPersonToServer(
-                        //     context: context,
-                        //     userName: titleController.text,
-                        //     password: titleController2.text,
-                        //     email: titleController3.text,
-                        //     intrestId: "1");
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(

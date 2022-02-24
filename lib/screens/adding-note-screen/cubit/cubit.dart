@@ -18,19 +18,6 @@ class AddingNoteCubit extends Cubit<AddingNoteStates> {
 
   static AddingNoteCubit get(context) => BlocProvider.of(context);
 
-  // List<AddingResponse>? AddingsResponseList;
-
-  // void cubitAddNote2({
-  //   @required String? text,
-  //   @required String? userId,
-  //   @required String? placeDateTime,
-  //   required BuildContext context,
-  // }) {
-  //   ShowMessage2(context);
-  //   // emit(AddingNoteSuccessState());
-  //
-  //
-  // }
   NotesGettingCubit? cubit3;
 
   void cubitAddNoteOnServer({
@@ -46,7 +33,6 @@ class AddingNoteCubit extends Cubit<AddingNoteStates> {
       userId: userId,
       placeDateTime: placeDateTime,
     );
-    // List<AddingRequest> list = [addingRequest];
 
     dynamic toJsonMap = jsonEncode(addingRequest);
 
@@ -57,7 +43,6 @@ class AddingNoteCubit extends Cubit<AddingNoteStates> {
       print(value.data);
 
       ShowMessage2(context);
-      // Map<String, dynamic> myMap = value.data;
       print('you make greatness bro =  ');
       cubit3 = NotesGettingCubit.get(context);
       cubit3!.emit(LoadingAgain());
@@ -112,7 +97,6 @@ class AddingNoteCubit extends Cubit<AddingNoteStates> {
         print('opened');
       },
     ).then((value) {
-      print('crrrrrrrrrr');
       _database = value;
       emit(AppCreateDatabaseState0());
     });
@@ -123,7 +107,6 @@ class AddingNoteCubit extends Cubit<AddingNoteStates> {
     required String userId,
     required String placeDateTime,
     required context,
-
   }) async {
     return await _database.transaction((txn) async {
       txn
@@ -135,25 +118,9 @@ class AddingNoteCubit extends Cubit<AddingNoteStates> {
         cubit3!.emit(LoadingAgain());
 
         emit(AddingNoteSuccessState());
-        // emit(AppInsertDatabaseState());
-        // getDataFromDatabase(_database);
       }).catchError((err) {
         print(err.toString());
       });
     });
   }
-
-  var newNotes = [];
-
-// void getDataFromDatabase(Database _database) {
-//   emit(AppCreateDatabaseLoadingState());
-//   _database.rawQuery('SELECT * FROM notes').then((value) {
-//     value.forEach((element) {
-//       newNotes.add(element);
-//
-//     });
-//     emit(AppGetDatabaseState());
-//   });
-// }
-
 }

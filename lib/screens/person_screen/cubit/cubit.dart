@@ -42,8 +42,6 @@ class AddingPersonCubit extends Cubit<AddingPersonStates> {
       print(value.data);
 
       showMessage2(context, "Added Successfully...  to Server");
-      // Map<String, dynamic> myMap = value.data;
-      print('you make greatness bro =  ');
       cubit2 = PersonGettingCubit.get(context);
       PersonGettingStates my2 = ChangedToggleTest2();
       cubit2!.emit(my2);

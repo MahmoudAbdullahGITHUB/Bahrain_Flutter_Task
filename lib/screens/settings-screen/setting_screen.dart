@@ -20,10 +20,6 @@ class SettingScreen extends StatelessWidget {
       builder: (context, state) {
         SettingsCubit cubit = SettingsCubit.get(context);
 
-        if (state is SettingsChangeToggleState) {
-
-        }
-
         return Scaffold(
             appBar: AppBar(
               title: const Text('Settings'),
@@ -44,7 +40,7 @@ class SettingScreen extends StatelessWidget {
                     Switch(
                       value: cubit.toggle,
                       onChanged: (value) {
-                        cubit.turnSwitch(toggle: value,context: context);
+                        cubit.turnSwitch(toggle: value, context: context);
                         isSwitch = value;
                       },
                       activeTrackColor: Colors.blueGrey,

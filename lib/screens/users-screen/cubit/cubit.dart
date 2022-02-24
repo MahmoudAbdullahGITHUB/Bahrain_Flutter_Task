@@ -24,7 +24,6 @@ class PersonGettingCubit extends Cubit<PersonGettingStates> {
       personsResponseList =
           myList.map((e) => PersonResponse.fromJson(e)).toList();
 
-      print('person name ${personsResponseList![0].username}');
       showMessage2(context, "Getting Successfully...  from Server");
       emit(PersonGettingSuccessState(personsResponseList!));
     }).catchError((error) {
@@ -76,7 +75,6 @@ class PersonGettingCubit extends Cubit<PersonGettingStates> {
 
   void getPersonFromDatabase(Database _database,context) {
     var myList = [];
-    print('leeeeeeeeeeeeh');
     emit(PersonGettingLoadingState());
     _database.rawQuery('SELECT * FROM person').then((value) {
       value.forEach((element) {
@@ -84,12 +82,9 @@ class PersonGettingCubit extends Cubit<PersonGettingStates> {
       });
       personsResponseList =
           myList.map((e) => PersonResponse.fromJson(e)).toList();
-      print('elist2 ${myList}');
-      print('elist3 ${personsResponseList!.length}');
-      print('elist4 ${personsResponseList![0].username}');
+
       showMessage2(context, "Getting Successfully...  from Local Database");
       emit(PersonGettingSuccessState(personsResponseList!));
-      // emit(AppGetDatabaseState());
     });
   }
 
@@ -104,44 +99,3 @@ class PersonGettingCubit extends Cubit<PersonGettingStates> {
   }
 
 }
-
-/*
-
-void getPersons({
-     String? token,
-  }) {
-    emit(PersonGettingLoadingState());
-    DioHelper.getPersons(path: ApiDataAndEndPoints.getPersonsUrl)
-        .then((value) {
-      List<dynamic> myList= value.data;
-      // final List parsed = json.decode(value.toString());
-      // List<PersonResponse>? responseModelList = TopTenUsersModelResponse.fromJson(parsed).list;
-
-      var litt = myList.map((e) => PersonResponse.fromJson(e)).toList();
-      List<PersonResponse>? personsResponseList = litt;
-
-      // personsResponse = PersonResponse.fromJson(value.data[0]);
-      // List<PersonResponse> list = myList.cast<PersonResponse>();
-      // String data = json.decode(json.encode(value.toString()));
-      //
-      // List<PersonResponse> ee = data;
-      // var data = jsonDecode(value.toString()).cast<PersonResponse>();
-      print('${litt[0].username}');
-      //
-      // // personsResponse = value.data;
-      // print('cscs ${myList[0]['username']}');
-
-      // personsResponse = PersonResponse.fromJson(myMap[0]);
-      //
-      // print(personsResponse?.username);
-
-      // emit(PersonGettingSuccessState(personsResponse));
-
-    }).catchError((error) {
-      print('error $error');
-      emit(PersonGettingErrorState(error.toString()));
-    });
-  }
-
-
- */

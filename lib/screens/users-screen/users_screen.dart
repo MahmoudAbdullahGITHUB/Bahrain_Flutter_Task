@@ -22,9 +22,7 @@ class UsersScreen extends StatelessWidget {
       builder: (context, state) {
         cubit = PersonGettingCubit.get(context);
         cubit2 = SettingsCubit.get(context);
-        print('toggle in persons ${cubit2!.toggle}');
         if (state is ChangedToggleTest2) {
-          print('is that right here or something else ${cubit2!.toggle}');
           cubit2!.toggle
               ? cubit!.getPersonFromDatabase(cubit!.database, context)
               : cubit!.getPersonsFromServer(context);
@@ -37,8 +35,6 @@ class UsersScreen extends StatelessWidget {
         }
         if (state is PersonGettingSuccessState) {
           myAllPersons = state.personsResponseList;
-          print('you make great persons ${myAllPersons?.length}');
-          print('you make great name ${myAllPersons?[0].username}');
         }
         return Scaffold(
           appBar: AppBar(
@@ -51,7 +47,6 @@ class UsersScreen extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   )
                 : ListView.builder(
-                    // itemCount: myAllNotes!.isNotEmpty ? myAllNotes!.length : 0,
                     itemCount:
                         myAllPersons!.isNotEmpty ? myAllPersons!.length : 0,
                     itemBuilder: (context, index) => Column(

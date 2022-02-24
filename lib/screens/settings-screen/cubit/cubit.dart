@@ -21,13 +21,8 @@ class SettingsCubit extends Cubit<SettingsStates> {
   NotesGettingCubit? cubit3;
   PersonGettingCubit? cubit4;
 
-  // MySharedPreferences sharedPreferences = MySharedPreferences() ;
-
   void turnSwitch({required bool toggle, context}) {
     this.toggle = toggle;
-
-    // sharedPreferences.saveToggle(toggle);
-
 
     cubit3 = NotesGettingCubit.get(context);
     cubit4 = PersonGettingCubit.get(context);

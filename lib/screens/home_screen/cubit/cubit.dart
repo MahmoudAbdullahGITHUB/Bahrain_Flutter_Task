@@ -27,8 +27,6 @@ class NotesGettingCubit extends Cubit<NotesGettingStates> {
 
       notesResponseList = myList.map((e) => NoteResponse.fromJson(e)).toList();
       notesResponseTempList = notesResponseList;
-      print('${notesResponseList![0].text}');
-
       showMessage2(context, "Getting Successfully...  from Server");
       emit(NoteGettingSuccessState(notesResponseList!));
     }).catchError((error) {
@@ -44,11 +42,9 @@ class NotesGettingCubit extends Cubit<NotesGettingStates> {
       return noteTitle.contains(text);
     }).toList();
     if (text.isNotEmpty) {
-      print('$text');
       notesResponseList = searchedNotes;
       emit(NoteSearchingFillingState(notesResponseList!));
     } else {
-      print('text');
       notesResponseList = notesResponseTempList;
       emit(NoteSearchingEmptyState(notesResponseList!));
     }
@@ -75,27 +71,25 @@ class NotesGettingCubit extends Cubit<NotesGettingStates> {
 
         _database
             .execute(
-            'CREATE TABLE person (id INTEGER PRIMARY KEY,username TEXT,'
+                'CREATE TABLE person (id INTEGER PRIMARY KEY,username TEXT,'
                 'email TEXT,password TEXT,intrestId TEXT)')
             .then((value) {
           print('table created');
         }).catchError((error) {
           print(error.toString());
         });
-
       },
       onOpen: (Database _database) {
         // getDataFromDatabase(_database);
         print('opened');
       },
     ).then((value) {
-      print('crrrrrrrrrr');
       _database = value;
       emit(AppCreateDatabaseState());
     });
   }
 
-  void getDataFromDatabase(Database _database,context) {
+  void getDataFromDatabase(Database _database, context) {
     var myList = [];
     notesResponseList = [];
     notesResponseTempList = [];
@@ -107,8 +101,6 @@ class NotesGettingCubit extends Cubit<NotesGettingStates> {
       });
       notesResponseList = myList.map((e) => NoteResponse.fromJson(e)).toList();
       notesResponseTempList = notesResponseList;
-      print('elist 7elw aho ${myList}');
-      print('elist ${notesResponseList!.length}');
 
       showMessage2(context, "Getting Successfully...  from Local Database");
       emit(NoteGettingSuccessState(notesResponseList!));
@@ -125,6 +117,4 @@ class NotesGettingCubit extends Cubit<NotesGettingStates> {
       duration: const Duration(seconds: 3),
     ).show(context);
   }
-
-
 }
