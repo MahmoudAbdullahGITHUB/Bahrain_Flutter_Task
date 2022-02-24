@@ -20,3 +20,10 @@ class PersonGettingErrorState extends PersonGettingStates {
 
   PersonGettingErrorState(this.error);
 }
+
+
+class AppCreateDatabaseLoadingState2 extends PersonGettingStates {}
+class AppGetDatabaseState2 extends PersonGettingStates {}
+class AppCreateDatabaseState2 extends PersonGettingStates {}
+
+class ChangedToggleTest2 extends PersonGettingStates {}

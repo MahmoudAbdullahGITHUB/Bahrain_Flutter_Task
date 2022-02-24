@@ -20,3 +20,9 @@ class AddingNoteErrorState extends AddingNoteStates {
 
   AddingNoteErrorState(this.error);
 }
+
+class AppCreateDatabaseState0 extends AddingNoteStates {}
+class AppInsertDatabaseState extends AddingNoteStates {}
+class AppCreateDatabaseLoadingState extends AddingNoteStates {}
+class AppGetDatabaseState extends AddingNoteStates {}
+

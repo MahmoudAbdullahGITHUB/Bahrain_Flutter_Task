@@ -6,9 +6,12 @@ import 'package:bahrain_flutter_task/model/adding_note/request.dart';
 import 'package:bahrain_flutter_task/model/user/response.dart';
 import 'package:bahrain_flutter_task/network/remote/dio_helper.dart';
 import 'package:bahrain_flutter_task/screens/adding-note-screen/cubit/states.dart';
+import 'package:bahrain_flutter_task/screens/home_screen/cubit/cubit.dart';
+import 'package:bahrain_flutter_task/screens/home_screen/cubit/states.dart';
 import 'package:bahrain_flutter_task/screens/users-screen/cubit/states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sqflite/sqflite.dart';
 
 class AddingNoteCubit extends Cubit<AddingNoteStates> {
   AddingNoteCubit() : super(AddingNoteInitialState());
@@ -28,14 +31,13 @@ class AddingNoteCubit extends Cubit<AddingNoteStates> {
   //
   //
   // }
+  NotesGettingCubit? cubit3;
 
-
-  void cubitAddNote({
+  void cubitAddNoteOnServer({
     @required String? text,
     @required String? userId,
     @required String? placeDateTime,
     required BuildContext context,
-
   }) {
     emit(AddingNoteLoadingState());
 
@@ -57,6 +59,8 @@ class AddingNoteCubit extends Cubit<AddingNoteStates> {
       ShowMessage2(context);
       // Map<String, dynamic> myMap = value.data;
       print('you make greatness bro =  ');
+      cubit3 = NotesGettingCubit.get(context);
+      cubit3!.emit(LoadingAgain());
 
       emit(AddingNoteSuccessState());
     }).catchError((error) {
@@ -72,5 +76,84 @@ class AddingNoteCubit extends Cubit<AddingNoteStates> {
       duration: const Duration(seconds: 3),
     ).show(context);
   }
+
+  ///  Local Database
+
+  late Database _database;
+
+  Database get database => _database;
+
+  void createDatabase() {
+    openDatabase(
+      'todo.db',
+      version: 1,
+      onCreate: (Database _database, int version) {
+        _database
+            .execute(
+                'CREATE TABLE notes (id INTEGER PRIMARY KEY,text TEXT,userId TEXT,placeDateTime TEXT)')
+            .then((value) {
+          print('table created');
+        }).catchError((error) {
+          print(error.toString());
+        });
+
+        _database
+            .execute(
+                'CREATE TABLE person (id INTEGER PRIMARY KEY,userName TEXT,'
+                'email TEXT,password TEXT,intrestId TEXT)')
+            .then((value) {
+          print('table created');
+        }).catchError((error) {
+          print(error.toString());
+        });
+      },
+      onOpen: (Database _database) {
+        // getDataFromDatabase(_database);
+        print('opened');
+      },
+    ).then((value) {
+      print('crrrrrrrrrr');
+      _database = value;
+      emit(AppCreateDatabaseState0());
+    });
+  }
+
+  insertToDatabase({
+    required String text,
+    required String userId,
+    required String placeDateTime,
+    required context,
+
+  }) async {
+    return await _database.transaction((txn) async {
+      txn
+          .rawInsert(
+              'INSERT INTO notes (text,userId,placeDateTime) VALUES ("$text","$userId","$placeDateTime")')
+          .then((value) {
+        print('note inserted');
+        cubit3 = NotesGettingCubit.get(context);
+        cubit3!.emit(LoadingAgain());
+
+        emit(AddingNoteSuccessState());
+        // emit(AppInsertDatabaseState());
+        // getDataFromDatabase(_database);
+      }).catchError((err) {
+        print(err.toString());
+      });
+    });
+  }
+
+  var newNotes = [];
+
+// void getDataFromDatabase(Database _database) {
+//   emit(AppCreateDatabaseLoadingState());
+//   _database.rawQuery('SELECT * FROM notes').then((value) {
+//     value.forEach((element) {
+//       newNotes.add(element);
+//
+//     });
+//     emit(AppGetDatabaseState());
+//   });
+// }
 
 }

@@ -20,3 +20,8 @@ class AddingPersonErrorState extends AddingPersonStates {
 
   AddingPersonErrorState(this.error);
 }
+
+class AppCreateDatabaseState extends AddingPersonStates {}
+class AppInsertDatabaseState extends AddingPersonStates {}
+
+class ChangedToggleTest3 extends AddingPersonStates {}

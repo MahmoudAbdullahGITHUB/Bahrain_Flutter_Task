@@ -34,7 +34,7 @@ dependencies:
 
   provider: ^6.0.2
   http: ^0.13.4
-#  shared_preferences: ^2.0.8
+  shared_preferences: ^2.0.13
 #  hexcolor: ^2.0.4
 #  carousel_pro: ^1.0.0
   sqflite: ^2.0.2

@@ -20,7 +20,7 @@ class PersonResponse {
     email = json['email'];
     imageAsBase64 = json['imageAsBase64'];
     intrestId = json['intrestId'];
-    id = json['id'];
+    // id = json['id'];
   }
 
   Map<String, dynamic> toJson() {

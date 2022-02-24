@@ -1,4 +1,3 @@
-
 import 'package:bahrain_flutter_task/model/notes/response.dart';
 import 'package:bahrain_flutter_task/model/user/response.dart';
 
@@ -12,11 +11,9 @@ class NoteGettingSuccessState extends NotesGettingStates {
   final List<NoteResponse> notesResponseList;
 
   NoteGettingSuccessState(this.notesResponseList);
-
 }
 
 class NoteGettingErrorState extends NotesGettingStates {
-
   final String error;
 
   NoteGettingErrorState(this.error);
@@ -27,9 +24,17 @@ class NoteSearchingFillingState extends NotesGettingStates {
 
   NoteSearchingFillingState(this.notesResponseList);
 }
+
 class NoteSearchingEmptyState extends NotesGettingStates {
   final List<NoteResponse> notesResponseList;
 
   NoteSearchingEmptyState(this.notesResponseList);
-
 }
+
+class AppCreateDatabaseLoadingState extends NotesGettingStates {}
+class AppGetDatabaseState extends NotesGettingStates {}
+class AppCreateDatabaseState extends NotesGettingStates {}
+
+class ChangedToggleTest extends NotesGettingStates {}
+class LoadingAgain extends NotesGettingStates {}
+
